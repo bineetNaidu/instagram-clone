@@ -2,7 +2,7 @@
   max-width: 500px;
   background-color: white;
   border: 1px solid lightgrey;
-  margin-bottom: 45px;
+  margin: 0 auto 45px auto;
 }
 
 .post__image {

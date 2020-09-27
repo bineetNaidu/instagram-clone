@@ -56,7 +56,6 @@ function App() {
 
   return (
     <div className="app">
-      {user && <ImageUploader username={user.displayName} />}
       <SignInModal
         email={email}
         handleEmail={handleEmail}
@@ -87,20 +86,27 @@ function App() {
           alt="Instagram Logo"
           className="app__headerImage"
         />
+        {user ? (
+          <div className="app__loginContainer">
+            <Button>@{user.displayName}</Button>
+            <Button onClick={() => auth.signOut()}>Logout</Button>
+          </div>
+        ) : (
+          <div className="app__loginContainer">
+            <Button onClick={toggleSignin}>Sign in</Button>
+            <Button onClick={toggleOpen}>Sign Up</Button>
+          </div>
+        )}
       </div>
-      {user ? (
-        <Button onClick={() => auth.signOut()}>Logout</Button>
-      ) : (
-        <div className="app__loginContainer">
-          <Button onClick={toggleSignin}>Sign in</Button>
-          <Button onClick={toggleOpen}>Sign Up</Button>
-        </div>
-      )}
 
-      {/* Posts */}
-      {posts.map(({ id, post }) => (
-        <Post key={id} {...post} />
-      ))}
+      <div className="app__posts">
+        {/* Posts */}
+        {posts.map(({ id, post }) => (
+          <Post key={id} {...post} />
+        ))}
+      </div>
+
+      {user && <ImageUploader username={user.displayName} />}
     </div>
   );
 }

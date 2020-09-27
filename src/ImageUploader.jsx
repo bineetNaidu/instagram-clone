@@ -5,6 +5,9 @@ import useFormState from "./hooks/useFormState";
 import { storage, db } from "./firebase";
 import firebase from "firebase";
 
+// STATICS
+import "./ImageUploader.css";
+
 const ImageUploader = ({ username }) => {
   // STATES
   const [caption, handleCaption, resetCaption] = useFormState("");
@@ -56,9 +59,9 @@ const ImageUploader = ({ username }) => {
   };
 
   return (
-    <div>
+    <div className="imageupload">
       {/* Progress Bar */}
-      <progress value={progress} max="100" />
+      <progress className="imageupload__progress" value={progress} max={100} />
       {/* Caption Input */}
       <TextField
         label="Caption Your Day"

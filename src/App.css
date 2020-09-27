@@ -8,6 +8,9 @@
   padding: 20px;
   background-color: white;
   border-bottom: 1px solid lightgrey;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .app__headerImage {
@@ -17,4 +20,8 @@
 .app__signUp {
   display: flex;
   flex-direction: column;
+}
+
+.app__posts {
+  padding: 20px;
 }

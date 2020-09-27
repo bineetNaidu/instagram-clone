@@ -59,21 +59,30 @@ const SignUpModal = ({
             type="text"
             value={username}
             onChange={handleUsername}
+            margin="normal"
             label="Username"
           />
           <TextField
             type="text"
             value={email}
             onChange={handleEmail}
+            margin="normal"
             label="Email"
           />
           <TextField
             type="password"
             value={password}
+            margin="normal"
             onChange={handlePassword}
             label="Password"
           />
-          <Button type="submit" onClick={handleSignUp}>
+          <Button
+            variant="contained"
+            style={{ marginTop: "10px" }}
+            color="secondary"
+            type="submit"
+            onClick={handleSignUp}
+          >
             Login
           </Button>
         </form>
