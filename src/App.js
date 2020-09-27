@@ -1,4 +1,5 @@
 import React from "react";
+import Post from "./Post";
 
 // STATICS
 import "./App.css";
@@ -15,8 +16,12 @@ function App() {
         />
       </div>
 
-      <h1>Yo!! Lets build a Instagram Clone</h1>
       {/* Posts */}
+      <Post />
+      <Post />
+      <Post />
+      <Post />
+      <Post />
     </div>
   );
 }

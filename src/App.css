@@ -1,6 +1,7 @@
 .app {
   background-color: #fafafa;
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
 }
 
 .app__header {
