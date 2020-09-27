@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Post from "./Post";
-import { db } from "./firebase";
+import { db, auth } from "./firebase";
+import useToggle from "./hooks/useToggle";
+import useFormState from "./hooks/useFormState";
+import Button from "@material-ui/core/Button";
+import SignInModal from "./SignInModal";
+import SignUpModal from "./SignUpModal";
 
 // STATICS
 import "./App.css";
@@ -8,6 +13,12 @@ import "./App.css";
 function App() {
   // STATES
   const [posts, setPosts] = useState([]);
+  const [open, toggleOpen] = useToggle(false);
+  const [openSignin, toggleSignin] = useToggle(false);
+  const [email, handleEmail, resetEmail] = useFormState("");
+  const [password, handlePassword, resetPassword] = useFormState("");
+  const [username, handleUsername, resetUsername] = useFormState("");
+  const [user, setUser] = useState(null);
 
   // HOOKS && CONTEXT
   useEffect(() => {
@@ -22,9 +33,49 @@ function App() {
     });
     // eslint-disable-next-line
   }, []);
-  // FUNCTIONS
+
+  useEffect(() => {
+    const unsubscribed = auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        // user Has Logged in
+        setUser(authUser);
+      } else {
+        // user has not logged in || logged out
+        setUser(null);
+      }
+    });
+
+    return () => {
+      // perform some clean ups action
+      unsubscribed();
+    };
+  }, [user, username]);
+
   return (
     <div className="app">
+      <SignInModal
+        email={email}
+        handleEmail={handleEmail}
+        resetEmail={resetEmail}
+        password={password}
+        handlePassword={handlePassword}
+        resetPassword={resetPassword}
+        openSignin={openSignin}
+        toggleSignin={toggleSignin}
+      />
+      <SignUpModal
+        email={email}
+        handleEmail={handleEmail}
+        resetEmail={resetEmail}
+        password={password}
+        resetPassword={resetPassword}
+        handlePassword={handlePassword}
+        username={username}
+        resetUsername={resetUsername}
+        handleUsername={handleUsername}
+        open={open}
+        toggleOpen={toggleOpen}
+      />
       {/* Header */}
       <div className="app__header">
         <img
@@ -33,6 +84,14 @@ function App() {
           className="app__headerImage"
         />
       </div>
+      {user ? (
+        <Button onClick={() => auth.signOut()}>Logout</Button>
+      ) : (
+        <div className="app__loginContainer">
+          <Button onClick={toggleSignin}>Sign in</Button>
+          <Button onClick={toggleOpen}>Sign Up</Button>
+        </div>
+      )}
 
       {/* Posts */}
       {posts.map(({ id, post }) => (
