@@ -1,10 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Post from "./Post";
+import { db } from "./firebase";
 
 // STATICS
 import "./App.css";
 
 function App() {
+  // STATES
+  const [posts, setPosts] = useState([]);
+
+  // HOOKS && CONTEXT
+  useEffect(() => {
+    db.collection("posts").onSnapshot((snapshot) => {
+      // retrieving datas from DB
+      setPosts(
+        snapshot.docs.map((doc) => ({
+          id: doc.id,
+          post: doc.data(),
+        }))
+      );
+    });
+    // eslint-disable-next-line
+  }, []);
+  // FUNCTIONS
   return (
     <div className="app">
       {/* Header */}
@@ -17,11 +35,9 @@ function App() {
       </div>
 
       {/* Posts */}
-      <Post />
-      <Post />
-      <Post />
-      <Post />
-      <Post />
+      {posts.map(({ id, post }) => (
+        <Post key={id} {...post} />
+      ))}
     </div>
   );
 }

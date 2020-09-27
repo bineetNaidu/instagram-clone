@@ -4,26 +4,23 @@ import React from "react";
 // STATICS
 import "./Post.css";
 
-const Post = () => {
+const Post = ({ username, imageUrl, caption }) => {
   return (
     <div className="post">
       {/* header -> avatar + username */}
       <div className="post__header">
         <Avatar
           className="post__avatar"
-          alt="username"
-          src="/static/images/avatar/1.jpg"
+          alt={username}
+          src={`${"/static/images/avatar/1.jpg"}`}
         />
-        <h3>Username</h3>
+        <h3>{username}</h3>
       </div>
       {/* image || post */}
-      <img
-        className="post__image"
-        src="https://www.andreasreiterer.at/wp-content/uploads/2017/11/react-logo-825x510.jpg"
-      />
+      <img className="post__image" src={imageUrl} />
       {/* username + caption */}
       <h4 className="post__text">
-        <strong>Username:</strong> Caption
+        <strong>{username}: </strong> {caption}
       </h4>
     </div>
   );
