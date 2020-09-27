@@ -49,13 +49,13 @@ const Post = ({ username, imageUrl, caption, postId, user }) => {
       <div className="post__header">
         <Avatar
           className="post__avatar"
-          alt={username}
+          alt={`${username}'s logo`}
           src={`${"/static/images/avatar/1.jpg"}`}
         />
         <h3>{username}</h3>
       </div>
       {/* image || post */}
-      <img className="post__image" src={imageUrl} />
+      <img className="post__image" src={imageUrl} alt={`${username}'s post`} />
       {/* username + caption */}
       <h4 className="post__text">
         <strong>{username}: </strong> {caption}

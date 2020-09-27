@@ -60,16 +60,24 @@ const ImageUploader = ({ username }) => {
 
   return (
     <div className="imageupload">
+      <h3 className="imageupload__title">Share Your Moments</h3>
       {/* Progress Bar */}
       <progress className="imageupload__progress" value={progress} max={100} />
       {/* Caption Input */}
-      <TextField
-        label="Caption Your Day"
-        value={caption}
-        onChange={handleCaption}
-      />
-      {/* FilePicker */}
-      <input type="file" onChange={handleImageFiles} />
+      <div className="imageupload__inputs">
+        <TextField
+          label="Caption Your Day"
+          value={caption}
+          onChange={handleCaption}
+        />
+        {/* FilePicker */}
+        <input
+          accept="image/*"
+          id="contained-button-file"
+          onChange={handleImageFiles}
+          type="file"
+        />
+      </div>
       {/* post button */}
       <Button variant="contained" color="secondary" onClick={handleUploads}>
         Post

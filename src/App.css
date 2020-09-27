@@ -28,3 +28,13 @@
 .app__posts {
   padding: 20px;
 }
+
+.app__footer {
+  z-index: 100;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  position: sticky;
+  bottom: 0;
+  border-top: 1px solid lightgray;
+}

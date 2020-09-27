@@ -3,17 +3,12 @@ import Modal from "@material-ui/core/Modal";
 import TextField from "@material-ui/core/TextField";
 import { auth } from "./firebase";
 import Button from "@material-ui/core/Button";
+import useFormState from "./hooks/useFormState";
 
 import { useStyles, getModalStyle } from "./utils";
 getModalStyle();
 
 const SignUpModal = ({
-  email,
-  handleEmail,
-  resetEmail,
-  password,
-  resetPassword,
-  handlePassword,
   username,
   resetUsername,
   handleUsername,
@@ -24,6 +19,8 @@ const SignUpModal = ({
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = useState(getModalStyle);
+  const [email, handleEmail, resetEmail] = useFormState("");
+  const [password, handlePassword, resetPassword] = useFormState("");
 
   const handleSignUp = (e) => {
     e.preventDefault();
