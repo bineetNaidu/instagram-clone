@@ -6,6 +6,7 @@ import useFormState from "./hooks/useFormState";
 import Button from "@material-ui/core/Button";
 import SignInModal from "./SignInModal";
 import SignUpModal from "./SignUpModal";
+import ImageUploader from "./ImageUploader";
 
 // STATICS
 import "./App.css";
@@ -22,15 +23,17 @@ function App() {
 
   // HOOKS && CONTEXT
   useEffect(() => {
-    db.collection("posts").onSnapshot((snapshot) => {
-      // retrieving datas from DB
-      setPosts(
-        snapshot.docs.map((doc) => ({
-          id: doc.id,
-          post: doc.data(),
-        }))
-      );
-    });
+    db.collection("posts")
+      .orderBy("timestamp", "desc")
+      .onSnapshot((snapshot) => {
+        // retrieving datas from DB
+        setPosts(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            post: doc.data(),
+          }))
+        );
+      });
     // eslint-disable-next-line
   }, []);
 
@@ -53,6 +56,7 @@ function App() {
 
   return (
     <div className="app">
+      {user && <ImageUploader username={user.displayName} />}
       <SignInModal
         email={email}
         handleEmail={handleEmail}
