@@ -102,7 +102,7 @@ function App() {
       <div className="app__posts">
         {/* Posts */}
         {posts.map(({ id, post }) => (
-          <Post key={id} {...post} />
+          <Post key={id} {...post} postId={id} user={user} />
         ))}
       </div>
 
